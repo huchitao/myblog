@@ -1,0 +1,50 @@
+2021-07-07 15:01:09.976  INFO 4900 --- [restartedMain] cn.zptc.blog.BlogApplication             : Starting BlogApplication using Java 1.8.0_152 on DESKTOP-39JG9US with PID 4900 (E:\idea-projects\blog\target\classes started by asus in E:\idea-projects\blog)
+2021-07-07 15:01:09.982 DEBUG 4900 --- [restartedMain] cn.zptc.blog.BlogApplication             : Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-07-07 15:01:09.982  INFO 4900 --- [restartedMain] cn.zptc.blog.BlogApplication             : The following profiles are active: dev
+2021-07-07 15:01:10.050  INFO 4900 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-07-07 15:01:10.051  INFO 4900 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-07-07 15:01:10.773  INFO 4900 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-07-07 15:01:10.789  INFO 4900 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
+2021-07-07 15:01:11.449  INFO 4900 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-07-07 15:01:11.456  INFO 4900 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-07 15:01:11.456  INFO 4900 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-07-07 15:01:11.534  INFO 4900 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-07 15:01:11.535  INFO 4900 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1481 ms
+2021-07-07 15:01:11.640  INFO 4900 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-07 15:01:12.518  INFO 4900 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-07 15:01:12.560  INFO 4900 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-07 15:01:12.616  INFO 4900 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-07-07 15:01:12.768  INFO 4900 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-07-07 15:01:12.863  INFO 4900 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-07-07 15:01:13.059  INFO 4900 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-07 15:01:13.068  INFO 4900 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-07 15:01:13.409  WARN 4900 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-07 15:01:13.575  INFO 4900 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-07 15:01:14.022  WARN 4900 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2021-07-07 15:01:14.052  INFO 4900 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-07 15:01:14.060  INFO 4900 --- [restartedMain] cn.zptc.blog.BlogApplication             : Started BlogApplication in 4.676 seconds (JVM running for 6.029)
+2021-07-07 15:01:21.165  INFO 4900 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-07 15:01:21.165  INFO 4900 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-07 15:01:21.167  INFO 4900 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-07-07 15:01:21.266  INFO 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.index, args=[1, {}])
+2021-07-07 15:01:21.330 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==>  Preparing: SELECT count(0) FROM (SELECT a.*, b.id AS typeId, b.name AS typeName, GROUP_CONCAT(c.id) AS tagId, d.avatar, d.nick_name FROM t_blog a LEFT JOIN t_type b ON a.type_id = b.id LEFT JOIN t_tag c ON c.id IN (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id) LEFT JOIN t_user d ON a.user_id = d.id GROUP BY a.id) table_count
+2021-07-07 15:01:21.344 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==> Parameters: 
+2021-07-07 15:01:21.427 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : <==      Total: 1
+2021-07-07 15:01:21.428 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog        : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id GROUP BY a.id LIMIT ?
+2021-07-07 15:01:21.429 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog        : ==> Parameters: 5(Integer)
+2021-07-07 15:01:21.434 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog        : <==      Total: 5
+2021-07-07 15:01:21.576 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TypeDao.listTypeTop     : ==>  Preparing: select COUNT(a.type_id) as blogsCount,b.id,b.name FROM t_blog a RIGHT JOIN t_type b on a.type_id = b.id GROUP BY b.id ORDER BY COUNT(a.type_id) DESC limit 6
+2021-07-07 15:01:21.576 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TypeDao.listTypeTop     : ==> Parameters: 
+2021-07-07 15:01:21.579 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TypeDao.listTypeTop     : <==      Total: 6
+2021-07-07 15:01:21.582 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TagDao.listTagTop       : ==>  Preparing: select COUNT(a.tags_id)as blogsCount,b.id,b.name FROM t_blog_tags a RIGHT JOIN t_tag b on a.tags_id = b.id GROUP BY b.id ORDER BY COUNT(a.tags_id) DESC LIMIT 10
+2021-07-07 15:01:21.582 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TagDao.listTagTop       : ==> Parameters: 
+2021-07-07 15:01:21.584 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TagDao.listTagTop       : <==      Total: 10
+2021-07-07 15:01:21.585 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-07-07 15:01:21.585 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 6(Integer)
+2021-07-07 15:01:21.589 DEBUG 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 6
+2021-07-07 15:01:21.589  INFO 4900 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Result : main
+2021-07-07 15:01:22.153  INFO 4900 --- [http-nio-8080-exec-4] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-07-07 15:01:22.154 DEBUG 4900 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-07-07 15:01:22.155 DEBUG 4900 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-07-07 15:01:22.159 DEBUG 4900 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-07-07 15:01:22.160  INFO 4900 --- [http-nio-8080-exec-4] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog

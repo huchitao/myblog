@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zptc.blog.dao.BlogDao">
+    <resultMap id="blogMap" type="Blog">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="content" column="content"></result>
+        <result property="firstPicture" column="first_picture"></result>
+        <result property="flag" column="flag"></result>
+        <result property="views" column="views"></result>
+        <result property="appreciation" column="appreciation"></result>
+        <result property="shareStatement" column="share_statement"></result>
+        <result property="commentabled" column="commentabled"></result>
+        <result property="published" column="published"></result>
+        <result property="recommend" column="recommend"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="tagIds" column="tagId"></result>
+        <result property="description" column="description"></result>
+        <association property="type" javaType="Type">
+            <result property="id" column="typeId"></result>
+            <result property="name" column="typeName"></result>
+        </association>
+        <association property="user" column="User">
+            <result property="id" column="user_id"></result>
+            <result property="avatar" column="avatar"></result>
+            <result property="nickName" column="nick_name"></result>
+        </association>
+    </resultMap>
+
+    <select id="listBlog" resultMap="blogMap">
+        select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a
+        LEFT JOIN t_type b on a.type_id=b.id
+        LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id)
+        LEFT JOIN t_user d on a.user_id=d.id
+        <where>
+            <if test="title!=null">
+                a.title like "%"#{title}"%"
+            </if>
+            <if test="type!=null">
+                and a.type_id=#{type.id}
+            </if>
+            <if test="recommend!=null">
+                and a.recommend=#{recommend}
+            </if>
+        </where>
+        GROUP BY a.id
+    </select>
+
+
+    <select id="getBlogById" resultMap="blogMap">
+        select a.*, b.id as typeId, b.name as typeName, GROUP_CONCAT(c.id) as tagId
+        from t_blog a
+                 LEFT JOIN t_type b on a.type_id = b.id
+                 LEFT JOIN t_tag c
+                           on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id)
+                 LEFT JOIN t_user d on a.user_id = d.id
+        where a.id = #{id}
+        GROUP BY a.id
+    </select>
+
+
+    <select id="listNewBlog" resultType="Blog" parameterType="java.lang.Integer">
+        select *
+        from t_blog
+        WHERE recommend = 1
+        ORDER BY update_time DESC LIMIT #{count}
+    </select>
+
+    <select id="queryBlogs" resultMap="blogMap">
+        select a.*, b.id as typeId, b.name as typeName, GROUP_CONCAT(c.id) as tagId, d.avatar, d.nick_name
+        from t_blog a
+                 LEFT JOIN t_type b on a.type_id = b.id
+                 LEFT JOIN t_tag c
+                           on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id)
+                 LEFT JOIN t_user d on a.user_id = d.id
+        where a.title like "%"#{query}"%" or  a.content LIKE "%"#{query}"%"
+        GROUP BY a.id
+    </select>
+
+    <select id="getBlogtoDetail" resultMap="blogMap">
+        select a.*, b.id as typeId, b.name as typeName, GROUP_CONCAT(c.id) as tagId, d.avatar, d.nick_name
+        from t_blog a
+                 LEFT JOIN t_type b on a.type_id = b.id
+                 LEFT JOIN t_tag c
+                           on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id)
+                 LEFT JOIN t_user d on a.user_id = d.id
+        where a.id = #{id}
+        GROUP BY a.id
+    </select>
+
+    <select id="listBlogInId" resultMap="blogMap">
+        select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a
+        LEFT JOIN t_type b on a.type_id=b.id
+        LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id)
+        LEFT JOIN t_user d on a.user_id=d.id
+        where a.id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        GROUP BY a.id
+    </select>
+
+    <select id="getBlogByYear" resultMap="blogMap">
+        select a.*, b.id as typeId, b.name as typeName, GROUP_CONCAT(c.id) as tagId, d.avatar, d.nick_name
+        from t_blog a
+                 LEFT JOIN t_type b on a.type_id = b.id
+                 LEFT JOIN t_tag c
+                           on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id)
+                 LEFT JOIN t_user d on a.user_id = d.id
+        where DATE_FORMAT(a.create_time, '%Y') = #{year}
+        GROUP BY a.id
+    </select>
+
+    <select id="getAllYear" resultType="java.lang.Integer">
+        select DATE_FORMAT(t_blog.create_time, '%Y') as year
+        FROM t_blog
+        GROUP BY year
+        ORDER BY year DESC
+    </select>
+
+    <select id="getBlogCount" resultType="java.lang.Integer">
+        select count(*)
+        FROM t_blog
+    </select>
+
+    <insert id="savaBlog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into t_blog(title, content, first_picture, flag, appreciation, views, share_statement, commentabled,
+                           published, recommend, description, create_time, update_time, type_id, user_id)
+        values (#{title}, #{content}, #{firstPicture}, #{flag}, #{appreciation}, #{views}, #{shareStatement},
+                #{commentabled}, #{published}, #{recommend}, #{description}, #{createTime}, #{updateTime}, #{type.id},
+                #{user.id})
+    </insert>
+
+    <delete id="deleteBlog">
+        delete
+        from t_blog
+        where id = #{id}
+    </delete>
+
+    <update id="updateBlog">
+        update t_blog
+        set title=#{title},
+            content=#{content},
+            first_picture=#{firstPicture},
+            flag=#{flag},
+            appreciation=#{appreciation},
+            share_statement=#{shareStatement},
+            commentabled=#{commentabled},
+            published=#{published},
+            recommend=#{recommend},
+            description=#{description},
+            update_time=#{updateTime},
+            type_id=#{type.id}
+        where id = #{id}
+    </update>
+
+    <update id="updateBlogViews">
+        update t_blog
+        set views=views + 1
+        where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>分类新增</title>
+		<link rel="stylesheet" type="text/css" href="../../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+		<link rel="stylesheet" href="../../static/css/me.css"  th:href="@{/css/me.css}"/>
+		<link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}"/>
+		<script src="../../static/js/jquery-3.4.1.js"  th:src="@{/js/jquery-3.4.1.js}"></script>
+		<script src="../../static/Semantic-UI-CSS-master/semantic.min.js" th:src="@{/Semantic-UI-CSS-master/semantic.min.js}"></script>
+		<script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<nav th:replace="admin/_fragment :: nav(2)" class="ui inverted attached segment m-padded-tab-mini m-shadow-small">
+		</nav>
+		
+		<div class="ui attached pointing menu">
+			<div class="ui container">
+				<div class="right menu">
+					<a href="#" th:href="@{/admin/types/input}"class="active teal item">发布</a>
+					<a href="#" th:href="@{/admin/types}" class="teal item">列表</a>
+				</div>
+			</div>		
+		</div>
+		<!-- 中间内容 -->
+		<div class="m-container-small  m-padded-tab-big">
+			<div class="ui container">
+					<form class="ui form" method="post"  th:object="${type}" action="#"  th:action="*{id}==null?@{/admin/types}:@{/admin/types/{id}(id=*{id})}">
+						<div class="field">
+							<div class="ui left labeled input">
+								<input type="hidden" name="id" th:value="*{id}">
+								<label class="ui teal basic label">名称</label>
+								<input type="text" name="name" placeholder="分类名称" th:value="*{name}"/>
+							</div>
+						</div>
+						<div class="ui error message">
+						</div>
+
+						<!--/*/
+							<div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+								<i class="close icon"></i>
+								<div class="header">验证失败</div>
+								<p th:errors="*{name}">提交信息不符合规则</p>
+							</div>
+						/*/-->
+
+						<div class="ui right aligned container">
+							<button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+							<button class="ui teal button">提交</button>
+						</div>
+					</form>
+			</div>	
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<!-- 底部 -->
+		<footer th:replace="admin/_fragment :: footer">
+
+		</footer>
+		<script>
+			$(document).on('click','.menu.toggle',function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			
+			$('.ui.dropdown').dropdown({
+				on:'hover'
+			});
+			
+			$('.ui.form').form({
+				fields:{
+					nam1e:{
+						identifier:'1name',
+						rules:[{
+							type:'empty',
+							prompt:'请输入分类名称'
+						}]
+					}
+				}
+			});
+
+		</script>
+	</body>
+	<script th:replace="_fragment :: footer_list_blog">
+
+	</script>
+</html>

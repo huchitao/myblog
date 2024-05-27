@@ -1,0 +1,220 @@
+2021-06-17 18:19:21.720  INFO 8404 --- [restartedMain] cn.zptc.blog.BlogApplication             : Starting BlogApplication using Java 1.8.0_152 on DESKTOP-39JG9US with PID 8404 (E:\idea-projects\blog\target\classes started by asus in E:\idea-projects\blog)
+2021-06-17 18:19:21.725 DEBUG 8404 --- [restartedMain] cn.zptc.blog.BlogApplication             : Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-06-17 18:19:21.726  INFO 8404 --- [restartedMain] cn.zptc.blog.BlogApplication             : The following profiles are active: dev
+2021-06-17 18:19:21.766  INFO 8404 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-17 18:19:21.766  INFO 8404 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-17 18:19:22.615  INFO 8404 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-17 18:19:22.634  INFO 8404 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 JPA repository interfaces.
+2021-06-17 18:19:23.542  INFO 8404 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-06-17 18:19:23.550  INFO 8404 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-17 18:19:23.550  INFO 8404 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-17 18:19:23.642  INFO 8404 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-17 18:19:23.643  INFO 8404 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1876 ms
+2021-06-17 18:19:23.828  INFO 8404 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-17 18:19:25.003  INFO 8404 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-17 18:19:25.051  INFO 8404 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-17 18:19:25.145  INFO 8404 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-17 18:19:25.385  INFO 8404 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-17 18:19:25.510  INFO 8404 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-06-17 18:19:25.740  INFO 8404 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-17 18:19:25.751  INFO 8404 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-17 18:19:26.159  WARN 8404 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-17 18:19:26.341  INFO 8404 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-17 18:19:27.042  INFO 8404 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-17 18:19:27.115  INFO 8404 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-17 18:19:27.127  INFO 8404 --- [restartedMain] cn.zptc.blog.BlogApplication             : Started BlogApplication in 6.134 seconds (JVM running for 8.368)
+2021-06-17 18:19:28.867  INFO 8404 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-17 18:19:28.867  INFO 8404 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-06-17 18:19:28.870  INFO 8404 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-06-17 18:19:29.040  INFO 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.index, args=[1, {}])
+2021-06-17 18:19:29.164 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==>  Preparing: SELECT count(0) FROM (SELECT a.*, b.id AS typeId, b.name AS typeName, GROUP_CONCAT(c.id) AS tagId, d.avatar, d.nick_name FROM t_blog a LEFT JOIN t_type b ON a.type_id = b.id LEFT JOIN t_tag c ON c.id IN (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id) LEFT JOIN t_user d ON a.user_id = d.id GROUP BY a.id) table_count
+2021-06-17 18:19:29.192 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==> Parameters: 
+2021-06-17 18:19:29.270 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : <==      Total: 1
+2021-06-17 18:19:29.272 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog        : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id GROUP BY a.id LIMIT ?
+2021-06-17 18:19:29.273 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog        : ==> Parameters: 5(Integer)
+2021-06-17 18:19:29.281 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listBlog        : <==      Total: 5
+2021-06-17 18:19:29.475 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TypeDao.listTypeTop     : ==>  Preparing: select COUNT(a.type_id) as blogsCount,b.id,b.name FROM t_blog a RIGHT JOIN t_type b on a.type_id = b.id GROUP BY b.id ORDER BY COUNT(a.type_id) DESC limit 6
+2021-06-17 18:19:29.476 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TypeDao.listTypeTop     : ==> Parameters: 
+2021-06-17 18:19:29.480 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TypeDao.listTypeTop     : <==      Total: 6
+2021-06-17 18:19:29.484 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TagDao.listTagTop       : ==>  Preparing: select COUNT(a.tags_id)as blogsCount,b.id,b.name FROM t_blog_tags a RIGHT JOIN t_tag b on a.tags_id = b.id GROUP BY b.id ORDER BY COUNT(a.tags_id) DESC LIMIT 10
+2021-06-17 18:19:29.484 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TagDao.listTagTop       : ==> Parameters: 
+2021-06-17 18:19:29.488 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.TagDao.listTagTop       : <==      Total: 10
+2021-06-17 18:19:29.489 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:19:29.489 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 6(Integer)
+2021-06-17 18:19:29.494 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 6
+2021-06-17 18:19:29.495  INFO 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Result : main
+2021-06-17 18:19:30.368  INFO 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:19:30.369 DEBUG 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:19:30.369 DEBUG 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:19:30.372 DEBUG 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:19:30.373  INFO 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:19:36.582  INFO 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.index, args=[2, {}])
+2021-06-17 18:19:36.586 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==>  Preparing: SELECT count(0) FROM (SELECT a.*, b.id AS typeId, b.name AS typeName, GROUP_CONCAT(c.id) AS tagId, d.avatar, d.nick_name FROM t_blog a LEFT JOIN t_type b ON a.type_id = b.id LEFT JOIN t_tag c ON c.id IN (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id) LEFT JOIN t_user d ON a.user_id = d.id GROUP BY a.id) table_count
+2021-06-17 18:19:36.587 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==> Parameters: 
+2021-06-17 18:19:36.589 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : <==      Total: 1
+2021-06-17 18:19:36.590 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listBlog        : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id GROUP BY a.id LIMIT ?, ?
+2021-06-17 18:19:36.590 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listBlog        : ==> Parameters: 5(Integer), 5(Integer)
+2021-06-17 18:19:36.599 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listBlog        : <==      Total: 3
+2021-06-17 18:19:36.604 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.TypeDao.listTypeTop     : ==>  Preparing: select COUNT(a.type_id) as blogsCount,b.id,b.name FROM t_blog a RIGHT JOIN t_type b on a.type_id = b.id GROUP BY b.id ORDER BY COUNT(a.type_id) DESC limit 6
+2021-06-17 18:19:36.604 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.TypeDao.listTypeTop     : ==> Parameters: 
+2021-06-17 18:19:36.606 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.TypeDao.listTypeTop     : <==      Total: 6
+2021-06-17 18:19:36.607 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.TagDao.listTagTop       : ==>  Preparing: select COUNT(a.tags_id)as blogsCount,b.id,b.name FROM t_blog_tags a RIGHT JOIN t_tag b on a.tags_id = b.id GROUP BY b.id ORDER BY COUNT(a.tags_id) DESC LIMIT 10
+2021-06-17 18:19:36.607 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.TagDao.listTagTop       : ==> Parameters: 
+2021-06-17 18:19:36.609 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.TagDao.listTagTop       : <==      Total: 10
+2021-06-17 18:19:36.610 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:19:36.610 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 6(Integer)
+2021-06-17 18:19:36.616 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 6
+2021-06-17 18:19:36.617  INFO 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.aspect.LogAspect            : Result : main
+2021-06-17 18:19:36.747  INFO 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:19:36.749 DEBUG 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:19:36.750 DEBUG 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:19:36.752 DEBUG 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:19:36.753  INFO 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:19:41.871  INFO 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/blog/125, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.goDetail, args=[125, {}])
+2021-06-17 18:19:41.873 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.getBlogtoDetail  : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where a.id=? GROUP BY a.id
+2021-06-17 18:19:41.874 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.getBlogtoDetail  : ==> Parameters: 125(Long)
+2021-06-17 18:19:41.878 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.getBlogtoDetail  : <==      Total: 1
+2021-06-17 18:19:41.878 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.updateBlogViews  : ==>  Preparing: update t_blog set views=views+1 where id=?
+2021-06-17 18:19:41.878 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.updateBlogViews  : ==> Parameters: 125(Long)
+2021-06-17 18:19:41.892 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.updateBlogViews  : <==    Updates: 1
+2021-06-17 18:19:41.892 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.getBlogtoDetail  : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where a.id=? GROUP BY a.id
+2021-06-17 18:19:41.893 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.getBlogtoDetail  : ==> Parameters: 125(Long)
+2021-06-17 18:19:41.894 DEBUG 8404 --- [http-nio-8080-exec-5] c.zptc.blog.dao.BlogDao.getBlogtoDetail  : <==      Total: 1
+2021-06-17 18:19:41.899 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.TagDao.getTagById       : ==>  Preparing: select * from t_tag where id=?
+2021-06-17 18:19:41.899 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.TagDao.getTagById       : ==> Parameters: 32(Long)
+2021-06-17 18:19:41.900 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.TagDao.getTagById       : <==      Total: 1
+2021-06-17 18:19:41.934  INFO 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.aspect.LogAspect            : Result : blog
+2021-06-17 18:19:42.367  INFO 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:19:42.367 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:19:42.368 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:19:42.371 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:19:42.372  INFO 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:19:42.438  INFO 8404 --- [http-nio-8080-exec-3] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/comments/125, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.CommentController.getComment, args=[125, {}])
+2021-06-17 18:19:42.444 DEBUG 8404 --- [http-nio-8080-exec-3] c.z.b.d.C.listParentCommentByBlogId      : ==>  Preparing: SELECT a.*,b.id as child_id,b.avatar as child_avatar,b.is_admin_comment as child_is_admin_comment,b.content as child_content,b.create_time as child_create_time,c.nick_name as child_parent_comment_name, b.email as child_email,b.nick_name as child_nick_name,b.blog_id as child_blog_id,b.parent_comment_id as child_parent_comment_id FROM t_comment a LEFT JOIN t_comment b on a.id=b.parent_comment_id LEFT JOIN t_comment c on b.parent_comment_id=c.id WHERE a.blog_id=? and a.parent_comment_id is NULL ORDER BY a.create_time DESC
+2021-06-17 18:19:42.445 DEBUG 8404 --- [http-nio-8080-exec-3] c.z.b.d.C.listParentCommentByBlogId      : ==> Parameters: 125(Long)
+2021-06-17 18:19:42.451 DEBUG 8404 --- [http-nio-8080-exec-3] c.z.b.d.C.listParentCommentByBlogId      : <==      Total: 0
+2021-06-17 18:19:42.451  INFO 8404 --- [http-nio-8080-exec-3] cn.zptc.blog.aspect.LogAspect            : Result : blog :: commentList
+2021-06-17 18:19:52.320  INFO 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/comments, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.CommentController.savaComment, args=[Comment(id=null, nickName=wxj, email=1633049666@qq.com, content=qsb, avatar=null, createTime=null, isAdminComment=false, blog=Blog(id=125, title=null, content=null, firstPicture=null, flag=null, views=null, description=null, appreciation=0, shareStatement=0, commentabled=0, published=0, recommend=null, createTime=null, updateTime=null, tagIds=null, type=null, tags=null, user=null, comments=null), replyComments=null, parentComment=Comment(id=0, nickName=null, email=null, content=null, avatar=null, createTime=null, isAdminComment=false, blog=null, replyComments=null, parentComment=null)), org.apache.catalina.session.StandardSessionFacade@4810d016])
+2021-06-17 18:19:52.322 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.getBlogById     : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where a.id=? GROUP BY a.id
+2021-06-17 18:19:52.323 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.getBlogById     : ==> Parameters: 125(Long)
+2021-06-17 18:19:52.324 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.BlogDao.getBlogById     : <==      Total: 1
+2021-06-17 18:19:52.326 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.CommentDao.savaComment  : ==>  Preparing: insert into t_comment(avatar,content,create_time,email,nick_name,blog_id,parent_comment_id,is_admin_comment) values(?,?,?,?,?,?,?,?)
+2021-06-17 18:19:52.331 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.CommentDao.savaComment  : ==> Parameters: /image/wxj18.jpg(String), qsb(String), 2021-06-17 18:19:52.326(Timestamp), 1633049666@qq.com(String), wxj(String), 125(Long), null, false(Boolean)
+2021-06-17 18:19:52.336 DEBUG 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.dao.CommentDao.savaComment  : <==    Updates: 1
+2021-06-17 18:19:52.339  INFO 8404 --- [http-nio-8080-exec-1] cn.zptc.blog.aspect.LogAspect            : Result : redirect:/comments/125
+2021-06-17 18:19:52.352  INFO 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/comments/125;jsessionid=241949B0F357B40875812124489073CA, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.CommentController.getComment, args=[125, {}])
+2021-06-17 18:19:52.352 DEBUG 8404 --- [http-nio-8080-exec-6] c.z.b.d.C.listParentCommentByBlogId      : ==>  Preparing: SELECT a.*,b.id as child_id,b.avatar as child_avatar,b.is_admin_comment as child_is_admin_comment,b.content as child_content,b.create_time as child_create_time,c.nick_name as child_parent_comment_name, b.email as child_email,b.nick_name as child_nick_name,b.blog_id as child_blog_id,b.parent_comment_id as child_parent_comment_id FROM t_comment a LEFT JOIN t_comment b on a.id=b.parent_comment_id LEFT JOIN t_comment c on b.parent_comment_id=c.id WHERE a.blog_id=? and a.parent_comment_id is NULL ORDER BY a.create_time DESC
+2021-06-17 18:19:52.353 DEBUG 8404 --- [http-nio-8080-exec-6] c.z.b.d.C.listParentCommentByBlogId      : ==> Parameters: 125(Long)
+2021-06-17 18:19:52.354 DEBUG 8404 --- [http-nio-8080-exec-6] c.z.b.d.C.listParentCommentByBlogId      : <==      Total: 1
+2021-06-17 18:19:52.355  INFO 8404 --- [http-nio-8080-exec-6] cn.zptc.blog.aspect.LogAspect            : Result : blog :: commentList
+2021-06-17 18:20:04.474  INFO 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/types/-1, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.TypeShowController.goType, args=[-1, 1, {}])
+2021-06-17 18:20:04.480 DEBUG 8404 --- [http-nio-8080-exec-4] c.z.b.dao.TypeDao.listTypeOrderByCount   : ==>  Preparing: select COUNT(a.type_id) as blogsCount,b.id,b.name FROM t_blog a RIGHT JOIN t_type b on a.type_id = b.id GROUP BY b.id ORDER BY COUNT(a.type_id) DESC
+2021-06-17 18:20:04.480 DEBUG 8404 --- [http-nio-8080-exec-4] c.z.b.dao.TypeDao.listTypeOrderByCount   : ==> Parameters: 
+2021-06-17 18:20:04.482 DEBUG 8404 --- [http-nio-8080-exec-4] c.z.b.dao.TypeDao.listTypeOrderByCount   : <==      Total: 7
+2021-06-17 18:20:04.485 DEBUG 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==>  Preparing: SELECT count(0) FROM (SELECT a.*, b.id AS typeId, b.name AS typeName, GROUP_CONCAT(c.id) AS tagId, d.avatar, d.nick_name FROM t_blog a LEFT JOIN t_type b ON a.type_id = b.id LEFT JOIN t_tag c ON c.id IN (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id) LEFT JOIN t_user d ON a.user_id = d.id WHERE a.type_id = ? GROUP BY a.id) table_count
+2021-06-17 18:20:04.486 DEBUG 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==> Parameters: 21(Long)
+2021-06-17 18:20:04.486 DEBUG 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : <==      Total: 1
+2021-06-17 18:20:04.487 DEBUG 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listBlog        : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id WHERE a.type_id=? GROUP BY a.id LIMIT ?
+2021-06-17 18:20:04.488 DEBUG 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listBlog        : ==> Parameters: 21(Long), 3(Integer)
+2021-06-17 18:20:04.490 DEBUG 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.dao.BlogDao.listBlog        : <==      Total: 3
+2021-06-17 18:20:04.492  INFO 8404 --- [http-nio-8080-exec-4] cn.zptc.blog.aspect.LogAspect            : Result : types
+2021-06-17 18:20:04.592  INFO 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:20:04.596 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:20:04.597 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:20:04.599 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:20:04.599  INFO 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:20:05.733  INFO 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/types/22, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.TypeShowController.goType, args=[22, 1, {}])
+2021-06-17 18:20:05.734 DEBUG 8404 --- [http-nio-8080-exec-5] c.z.b.dao.TypeDao.listTypeOrderByCount   : ==>  Preparing: select COUNT(a.type_id) as blogsCount,b.id,b.name FROM t_blog a RIGHT JOIN t_type b on a.type_id = b.id GROUP BY b.id ORDER BY COUNT(a.type_id) DESC
+2021-06-17 18:20:05.734 DEBUG 8404 --- [http-nio-8080-exec-5] c.z.b.dao.TypeDao.listTypeOrderByCount   : ==> Parameters: 
+2021-06-17 18:20:05.736 DEBUG 8404 --- [http-nio-8080-exec-5] c.z.b.dao.TypeDao.listTypeOrderByCount   : <==      Total: 7
+2021-06-17 18:20:05.740 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==>  Preparing: SELECT count(0) FROM (SELECT a.*, b.id AS typeId, b.name AS typeName, GROUP_CONCAT(c.id) AS tagId, d.avatar, d.nick_name FROM t_blog a LEFT JOIN t_type b ON a.type_id = b.id LEFT JOIN t_tag c ON c.id IN (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id) LEFT JOIN t_user d ON a.user_id = d.id WHERE a.type_id = ? GROUP BY a.id) table_count
+2021-06-17 18:20:05.741 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==> Parameters: 22(Long)
+2021-06-17 18:20:05.742 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : <==      Total: 1
+2021-06-17 18:20:05.744 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.listBlog        : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id WHERE a.type_id=? GROUP BY a.id LIMIT ?
+2021-06-17 18:20:05.744 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.listBlog        : ==> Parameters: 22(Long), 3(Integer)
+2021-06-17 18:20:05.747 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.listBlog        : <==      Total: 2
+2021-06-17 18:20:05.747  INFO 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.aspect.LogAspect            : Result : types
+2021-06-17 18:20:05.813  INFO 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:20:05.814 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:20:05.814 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:20:05.816 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:20:05.816  INFO 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:20:06.414  INFO 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/types/24, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.TypeShowController.goType, args=[24, 1, {}])
+2021-06-17 18:20:06.417 DEBUG 8404 --- [http-nio-8080-exec-8] c.z.b.dao.TypeDao.listTypeOrderByCount   : ==>  Preparing: select COUNT(a.type_id) as blogsCount,b.id,b.name FROM t_blog a RIGHT JOIN t_type b on a.type_id = b.id GROUP BY b.id ORDER BY COUNT(a.type_id) DESC
+2021-06-17 18:20:06.417 DEBUG 8404 --- [http-nio-8080-exec-8] c.z.b.dao.TypeDao.listTypeOrderByCount   : ==> Parameters: 
+2021-06-17 18:20:06.418 DEBUG 8404 --- [http-nio-8080-exec-8] c.z.b.dao.TypeDao.listTypeOrderByCount   : <==      Total: 7
+2021-06-17 18:20:06.422 DEBUG 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==>  Preparing: SELECT count(0) FROM (SELECT a.*, b.id AS typeId, b.name AS typeName, GROUP_CONCAT(c.id) AS tagId, d.avatar, d.nick_name FROM t_blog a LEFT JOIN t_type b ON a.type_id = b.id LEFT JOIN t_tag c ON c.id IN (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id = a.id) LEFT JOIN t_user d ON a.user_id = d.id WHERE a.type_id = ? GROUP BY a.id) table_count
+2021-06-17 18:20:06.423 DEBUG 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : ==> Parameters: 24(Long)
+2021-06-17 18:20:06.424 DEBUG 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.dao.BlogDao.listBlog_COUNT  : <==      Total: 1
+2021-06-17 18:20:06.425 DEBUG 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.dao.BlogDao.listBlog        : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id WHERE a.type_id=? GROUP BY a.id LIMIT ?
+2021-06-17 18:20:06.426 DEBUG 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.dao.BlogDao.listBlog        : ==> Parameters: 24(Long), 3(Integer)
+2021-06-17 18:20:06.428 DEBUG 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.dao.BlogDao.listBlog        : <==      Total: 1
+2021-06-17 18:20:06.429  INFO 8404 --- [http-nio-8080-exec-8] cn.zptc.blog.aspect.LogAspect            : Result : types
+2021-06-17 18:20:06.490  INFO 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:20:06.491 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:20:06.492 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:20:06.493 DEBUG 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:20:06.494  INFO 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:20:07.399  INFO 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/tags/-1, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.TagShowController.goTag, args=[-1, 1, {}])
+2021-06-17 18:20:07.403 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.blog.dao.TagDao.listTagOrderByCount  : ==>  Preparing: select COUNT(a.tags_id)as blogsCount,b.id,b.name FROM t_blog_tags a RIGHT JOIN t_tag b on a.tags_id = b.id GROUP BY b.id ORDER BY COUNT(a.tags_id) DESC
+2021-06-17 18:20:07.404 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.blog.dao.TagDao.listTagOrderByCount  : ==> Parameters: 
+2021-06-17 18:20:07.405 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.blog.dao.TagDao.listTagOrderByCount  : <==      Total: 13
+2021-06-17 18:20:07.406 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.b.d.B.getAllBlogIds_COUNT            : ==>  Preparing: SELECT count(0) FROM t_blog_tags WHERE tags_id = ?
+2021-06-17 18:20:07.406 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.b.d.B.getAllBlogIds_COUNT            : ==> Parameters: 23(Long)
+2021-06-17 18:20:07.407 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.b.d.B.getAllBlogIds_COUNT            : <==      Total: 1
+2021-06-17 18:20:07.408 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.blog.dao.BlogsTagsDao.getAllBlogIds  : ==>  Preparing: SELECT group_concat(blogs_id) from t_blog_tags WHERE tags_id=? LIMIT ?
+2021-06-17 18:20:07.408 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.blog.dao.BlogsTagsDao.getAllBlogIds  : ==> Parameters: 23(Long), 3(Integer)
+2021-06-17 18:20:07.409 DEBUG 8404 --- [http-nio-8080-exec-9] c.z.blog.dao.BlogsTagsDao.getAllBlogIds  : <==      Total: 1
+2021-06-17 18:20:07.411 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.BlogDao.listBlogInId    : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where a.id in ( ? , ? ) GROUP BY a.id
+2021-06-17 18:20:07.411 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.BlogDao.listBlogInId    : ==> Parameters: 120(Long), 122(Long)
+2021-06-17 18:20:07.414 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.BlogDao.listBlogInId    : <==      Total: 2
+2021-06-17 18:20:07.415 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==>  Preparing: select * from t_tag where id=?
+2021-06-17 18:20:07.415 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==> Parameters: 23(Long)
+2021-06-17 18:20:07.416 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : <==      Total: 1
+2021-06-17 18:20:07.417 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==>  Preparing: select * from t_tag where id=?
+2021-06-17 18:20:07.417 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==> Parameters: 28(Long)
+2021-06-17 18:20:07.417 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : <==      Total: 1
+2021-06-17 18:20:07.418 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==>  Preparing: select * from t_tag where id=?
+2021-06-17 18:20:07.418 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==> Parameters: 24(Long)
+2021-06-17 18:20:07.419 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : <==      Total: 1
+2021-06-17 18:20:07.419 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==>  Preparing: select * from t_tag where id=?
+2021-06-17 18:20:07.419 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==> Parameters: 30(Long)
+2021-06-17 18:20:07.420 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : <==      Total: 1
+2021-06-17 18:20:07.421 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==>  Preparing: select * from t_tag where id=?
+2021-06-17 18:20:07.421 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : ==> Parameters: 23(Long)
+2021-06-17 18:20:07.421 DEBUG 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.dao.TagDao.getTagById       : <==      Total: 1
+2021-06-17 18:20:07.422  INFO 8404 --- [http-nio-8080-exec-9] cn.zptc.blog.aspect.LogAspect            : Result : tags
+2021-06-17 18:20:07.505  INFO 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:20:07.506 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:20:07.507 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:20:07.509 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:20:07.510  INFO 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:20:08.291  INFO 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/archives, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.ArchivesShowController.archives, args=[{}])
+2021-06-17 18:20:08.296 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getAllYear      : ==>  Preparing: select DATE_FORMAT(t_blog.create_time,'%Y') as year FROM t_blog GROUP BY year ORDER BY year DESC
+2021-06-17 18:20:08.298 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getAllYear      : ==> Parameters: 
+2021-06-17 18:20:08.303 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getAllYear      : <==      Total: 3
+2021-06-17 18:20:08.304 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where DATE_FORMAT(a.create_time,'%Y')=? GROUP BY a.id
+2021-06-17 18:20:08.304 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : ==> Parameters: 2021(Integer)
+2021-06-17 18:20:08.306 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : <==      Total: 4
+2021-06-17 18:20:08.307 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where DATE_FORMAT(a.create_time,'%Y')=? GROUP BY a.id
+2021-06-17 18:20:08.307 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : ==> Parameters: 2020(Integer)
+2021-06-17 18:20:08.309 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : <==      Total: 3
+2021-06-17 18:20:08.309 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : ==>  Preparing: select a.*,b.id as typeId,b.name as typeName,GROUP_CONCAT(c.id) as tagId,d.avatar,d.nick_name from t_blog a LEFT JOIN t_type b on a.type_id=b.id LEFT JOIN t_tag c on c.id in (SELECT t_blog_tags.tags_id FROM t_blog_tags WHERE t_blog_tags.blogs_id=a.id) LEFT JOIN t_user d on a.user_id=d.id where DATE_FORMAT(a.create_time,'%Y')=? GROUP BY a.id
+2021-06-17 18:20:08.309 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : ==> Parameters: 2019(Integer)
+2021-06-17 18:20:08.311 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogByYear   : <==      Total: 1
+2021-06-17 18:20:08.311 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogCount    : ==>  Preparing: select count(*) FROM t_blog
+2021-06-17 18:20:08.311 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogCount    : ==> Parameters: 
+2021-06-17 18:20:08.316 DEBUG 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.dao.BlogDao.getBlogCount    : <==      Total: 1
+2021-06-17 18:20:08.316  INFO 8404 --- [http-nio-8080-exec-5] cn.zptc.blog.aspect.LogAspect            : Result : archives
+2021-06-17 18:20:08.392  INFO 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:20:08.393 DEBUG 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:20:08.394 DEBUG 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:20:08.397 DEBUG 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:20:08.398  INFO 8404 --- [http-nio-8080-exec-7] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog
+2021-06-17 18:20:09.590  INFO 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/about, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.AboutShowController.about, args=[])
+2021-06-17 18:20:09.592  INFO 8404 --- [http-nio-8080-exec-10] cn.zptc.blog.aspect.LogAspect            : Result : about
+2021-06-17 18:20:09.691  INFO 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.aspect.LogAspect            : Request : Log(url=http://localhost:8080/footer/blog, ip=0:0:0:0:0:0:0:1, classMethod=cn.zptc.blog.controller.MainController.footerBlogs, args=[{}])
+2021-06-17 18:20:09.693 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==>  Preparing: select * from t_blog WHERE recommend=1 ORDER BY update_time DESC LIMIT ?
+2021-06-17 18:20:09.693 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : ==> Parameters: 3(Integer)
+2021-06-17 18:20:09.695 DEBUG 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.dao.BlogDao.listNewBlog     : <==      Total: 3
+2021-06-17 18:20:09.696  INFO 8404 --- [http-nio-8080-exec-2] cn.zptc.blog.aspect.LogAspect            : Result : _fragment :: footerListBlog

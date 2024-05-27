@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zptc.blog.dao.TypeDao">
+    <select id="listType" resultType="Type">
+        select *
+        from t_type
+    </select>
+
+    <select id="listTypeTop" resultType="Type">
+        select COUNT(a.type_id) as blogsCount, b.id, b.name
+        FROM t_blog a
+                 RIGHT JOIN t_type b on a.type_id = b.id
+        GROUP BY b.id
+        ORDER BY COUNT(a.type_id) DESC limit 6
+    </select>
+
+    <select id="listTypeOrderByCount" resultType="Type">
+        select COUNT(a.type_id) as blogsCount, b.id, b.name
+        FROM t_blog a
+                 RIGHT JOIN t_type b on a.type_id = b.id
+        GROUP BY b.id
+        ORDER BY COUNT(a.type_id) DESC
+    </select>
+
+    <select id="getTypeById" resultType="Type">
+        select *
+        from t_type
+        where id = #{id}
+    </select>
+
+    <select id="getTypeByName" resultType="Type">
+        select *
+        from t_type
+        where name = #{name}
+    </select>
+
+    <insert id="saveType">
+        insert into t_type(name)
+        values (#{name})
+    </insert>
+
+    <delete id="deleteType">
+        delete
+        from t_type
+        where id = #{id}
+    </delete>
+
+    <update id="updateType">
+        update t_type
+        set name=#{name}
+        where id = #{id}
+    </update>
+</mapper>

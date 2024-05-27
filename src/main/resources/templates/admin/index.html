@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>博客管理</title>
+		<link rel="stylesheet" type="text/css" href="../../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+		<link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
+		<script src="../../static/js/jquery-3.4.1.js" th:src="@{/js/jquery-3.4.1.js}"></script>
+		<script src="../../static/Semantic-UI-CSS-master/semantic.min.js" th:src="@{/Semantic-UI-CSS-master/semantic.min.js}"></script>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<nav th:replace="admin/_fragment :: nav(0)"  class="ui inverted attached segment m-padded-tab-mini m-shadow-small">
+
+		</nav>
+		<!-- 中间内容 -->
+		<div class="m-container-small  m-padded-tab-big">
+			<div class="ui container">
+				<div class="ui success large message">
+					<h3>Hi,</h3>
+					<p>[[${session.user.userName}]]，欢迎登录！</p>
+				</div>
+			</div>
+
+			<img src="https://unsplash.it/1000/400?image=1081" class="ui rounded bordered fluid image" />
+		</div>
+		<br />
+		<br />
+		<!-- 底部 -->
+		<footer th:replace="_fragment :: footer">
+
+		</footer>
+		<script>
+			$(document).on('click','.menu.toggle',function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			$('.ui.dropdown').dropdown({
+				on:'hover'
+			});
+		</script>
+	</body>
+	<script th:replace="_fragment :: footer_list_blog">
+
+	</script>
+</html>

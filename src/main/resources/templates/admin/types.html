@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>分类管理</title>
+		<link rel="stylesheet" type="text/css" href="../../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+		<link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
+		<script src="../../static/js/jquery-3.4.1.js" th:src="@{/js/jquery-3.4.1.js}"></script>
+		<script src="../../static/Semantic-UI-CSS-master/semantic.min.js" th:src="@{/Semantic-UI-CSS-master/semantic.min.js}"></script>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<nav th:replace="admin/_fragment :: nav(2)" class="ui inverted attached segment m-padded-tab-mini m-shadow-small">
+		</nav>
+		
+		<div class="ui attached pointing menu">
+			<div class="ui container">
+				<div class="right menu">
+					<a href="#" th:href="@{/admin/types/input}"class="teal item">发布</a>
+					<a href="#" th:href="@{/admin/types}" class="active teal item">列表</a>
+				</div>
+			</div>		
+		</div>
+		<!-- 中间内容 -->
+		<div class="m-container-small  m-padded-tab-big">
+			<div class="ui container">
+				<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+					<i class="close icon"></i>
+					<div class="header">提示：</div>
+					<p th:text="${message}">恭喜，操作成功！</p>
+				</div>
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>名称</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="type,iterStat :${pageInfo.getList()}">
+							<td th:text="${iterStat.count}">1</td>
+							<td th:text="${type.name}">刻意练习清单</td>
+							<td>
+								<a th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button" href="#">编辑</a>
+								<a th:href="@{/admin/types/{id}/delete(id=${type.id})}"  class="ui mini red basic button" href="#">删除</a>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="6">
+								<div class="ui mini pagination menu" th:if="${pageInfo.pages}>1">
+									<a th:href="@{/admin/types(pn=${pageInfo.getPageNum()-1})}" th:unless="${pageInfo.isIsFirstPage()}" class="item">
+										上一页
+									</a>
+									<a th:href="@{/admin/types(pn=${pageInfo.getPageNum()+1})}"  th:unless="${pageInfo.isIsLastPage()}"  class="item">
+										下一页
+									</a>
+								</div>
+								<a th:href="@{/admin/types/input}" class="ui mini right floated teal basic button" href="#">新增</a>
+							</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<!-- 底部 -->
+		<footer th:replace="admin/_fragment :: footer">
+
+		</footer>
+		<script>
+			$(document).on('click','.menu.toggle',function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+
+			$('.ui.dropdown').dropdown({
+				on:'hover'
+			});
+
+			$('.message .close')
+				.on('click',function (){
+					$(this)
+						.closest('.message')
+						.transition('fade');
+				});
+		</script>
+	</body>
+	<script th:replace="_fragment :: footer_list_blog">
+
+	</script>
+</html>

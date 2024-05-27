@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+		<link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
+		<script src="../static/Semantic-UI-CSS-master/semantic.min.js" th:src="@{/Semantic-UI-CSS-master/semantic.min.js}"></script>
+		<script src="../static/js/jquery-3.4.1.js" th:src="@{/js/jquery-3.4.1.js}"></script>
+		<script>
+			$(document).on('click','.menu.toggle',function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			})
+		</script>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<nav th:replace="_fragment :: nav(1)">
+		</nav>
+		<!-- 中间内容 -->
+		<div class="m-container  m-padded-tab-big">
+			<div class="ui container">
+				<div class="ui stackable grid">
+					<!--左边博客列表  -->
+					<div class="eleven wide column">
+						<!-- header -->
+						<div class="ui top  attached segment">
+							<div class="ui middle aligned two column grid">
+								<div class="column">
+									<h3 class="ui teal header">博客</h3>
+								</div>
+								<div class="column right aligned">
+									共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogs.total}"> 14 </h2>篇
+								</div>
+							</div>
+						</div>
+						<!-- content -->
+						<div class="ui attached vertical segment">
+							<div class="ui padded   segment m-padded-tab-large" th:each="blog : ${blogs.getList()}">
+								<div class="ui middle aligned mobile stackable grid">
+									<div class="eleven wide column"> 
+										<h3 class="ui header">
+											<a th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}">
+												你真的理解什么是财富自由吗?
+											</a>
+										</h3>
+										<p class="m-text" th:text="|${blog.description}......|">
+											正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是。我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已......
+										</p>
+										<div class="ui grid">
+											<div class="eleven wide column">
+												<div class="ui mini horizontal link list ">
+													<div class="item">
+														<img src="https://unsplash.it/100/100?image=1062"  class="ui avatar image" th:src="${blog.user.avatar}" />
+														<div class="content">
+															<a href="#" class="header" th:text="${blog.user.nickName}">
+																吴晓杰
+															</a>
+														</div>
+													</div>
+													<div class="item" >
+														<i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-04-16</span>
+													</div>
+													<div class="item">
+														<i class="eye icon"></i> <span th:text="${blog.views}">6281</span>
+													</div>
+												</div>
+											</div>
+											<div class="right aligned five wide column">
+												<a href="#" target="_blank" class="ui teal basic label m-padded-thiy m-text-thin" th:text="${blog.type}!=null?${blog.type.name}:'无分类'">
+													认知升级
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="five wide column">
+										<a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+											<img src="https://unsplash.it/800/450?image=1005" class="ui rounded image" th:src="${blog.firstPicture}"/>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- footer -->
+						<div class="ui bottom attached segment" th:if="${blogs.pages}>1">
+							<div class="ui middle aligned two column grid" >
+								<div class="column">
+									<a th:href="@{/(pn=${blogs.getPageNum()-1})}" th:unless="${blogs.isIsFirstPage()}" class="ui mini teal basic button">上一页</a>
+								</div>
+								<div class="column right aligned">
+									<a th:href="@{/(pn=${blogs.getPageNum()+1})}" th:unless="${blogs.isIsLastPage()}" href="#" class="ui mini teal basic button">下一页</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 右边top -->
+					<div class="five wide column">
+						<!-- 分类 -->
+						<div class="ui segments">
+							<div class="ui secondary segment">
+								<div class="ui two column grid">
+									<div class="column">
+										<i class="idea icon"></i>分类
+									</div>
+									<div class="right aligned column">
+										<a th:href="@{/types/{id}(id=-1)}">more<i class="angle double right icon"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="ui teal segment" >
+								<div class="ui fluid vertical menu">
+									<a th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${types}">
+									 <span th:text="${type.name}"></span>
+									 <div class="ui teal basic left pointing label" th:text="${type.blogsCount}">13</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						<!-- 标签 -->
+						<div class="ui segments m-margin-top-large">
+							<div class="ui secondary segment">
+								<div class="ui two column grid">
+									<div class="column">
+										<i class="tags icon"></i>标签
+									</div>
+									<div class="right aligned column">
+										<a th:href="@{/tags/{id}(id=-1)}">more<i class="angle double right icon"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="ui teal segment">
+								<a th:href="@{/tags/{id}(id=${tag.id})}" class="ui teal basic left pointing label m-margin-tb-thiy" th:each="tag : ${tags}">
+									<span th:text="${tag.name}"></span>
+									<div class="detail" th:text="${tag.blogsCount}">23</div>
+								</a>
+							</div>
+						</div>
+						<!-- 最新推荐 -->
+						<div class="ui segments m-black m-margin-top-large" >
+							<div class="ui secondary segment">
+								<i class="bookmark icon"></i>最新推荐
+							</div>
+							<div class="ui segment" th:each="newBlog : ${newBlogs}">
+								<a th:href="@{/blog/{id}(id=${newBlog.id})}" target="_blank" class="m-black m-text-thin" th:text="${newBlog.title}">用户故事</a>
+							</div>
+						</div>
+						<!-- 二维码 -->
+						<h4 class="ui horizontal divider header m-margin-top-large">
+							扫码关注我
+						</h4>
+						<div class="ui card centered" style="width:11em;" >
+							<img src="../static/image/profile.jpg" th:src="@{(${wechatQrCode})}" class="ui rounded image" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<!-- 底部 -->
+		<footer th:replace="_fragment :: footer">
+		</footer>
+	</body>
+	<script th:replace="_fragment :: footer_list_blog">
+
+	</script>
+</html>

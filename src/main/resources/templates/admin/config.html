@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>个人信息管理</title>
+    <link rel="stylesheet" type="text/css" href="../../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
+    <script src="../../static/js/jquery-3.4.1.js" th:src="@{/js/jquery-3.4.1.js}"></script>
+    <script src="../../static/Semantic-UI-CSS-master/semantic.min.js" th:src="@{/Semantic-UI-CSS-master/semantic.min.js}"></script>
+</head>
+<body>
+<!-- 导航 -->
+<nav th:replace="admin/_fragment :: nav(4)" class="ui inverted attached segment m-padded-tab-mini m-shadow-small">
+</nav>
+
+
+<!-- 中间内容 -->
+<div class="m-container-small  m-padded-tab-big">
+    <div class="ui container">
+        <form class="ui form" method="post" action="#">
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">QQ</label>
+                    <input type="text" name="QQNO" id="qq" onblur="updateMess('1')" placeholder="QQ号码"  th:value="${qq}"/>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">邮箱</label>
+                    <input type="text" name="email" id="email" onblur="updateMess('2')" placeholder="邮箱地址" th:value="${email}"/>
+                </div>
+            </div>
+        </form>
+        <form method="post" th:action="@{/admin/upload}" id="importFile" enctype="multipart/form-data" style="margin-top: 10px;">
+            <input type="text" name="type" id="fileType" style="display: none" value="1">
+            <input type="file" name="file" id="openFile" style="display: none">
+        </form>
+        <div style="text-align:center;">
+            <div style="display: inline-block;margin:10px 50px;">
+                <img class="ui medium rounded image" th:src="@{(${wechatQrCode})}" style="width:150px " >
+                <button type="button" class="ui teal basic label" onclick="uploadFile('1')" style="margin-top: 10px;">上传微信二维码</button>
+            </div>
+            <div style="display: inline-block;margin:10px 50px;">
+                <img class="ui medium rounded image" th:src="@{(${wechatCollectionCode})}" style="width:150px " >
+                <button type="button" class="ui teal basic label" onclick="uploadFile('2')" style="margin-top: 10px;">上传微信收款码</button>
+            </div>
+            <div style="display: inline-block;margin:10px 50px;">
+                <img class="ui medium rounded image" th:src="@{(${alipayCollectionCode})}" style="width:150px " >
+                <button type="button" class="ui teal basic label" onclick="uploadFile('3')" style="margin-top: 10px;">上传支付宝收款码</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<!-- 底部 -->
+<footer th:replace="admin/_fragment :: footer">
+
+</footer>
+<script>
+
+    function updateMess(k){
+        $.ajax({
+                url: '/admin/updateMess',
+                type: "post",
+                data: {type:k,updateValue:k==1?$("#qq").val():$("#email").val()},
+                success: function (r) {
+                }
+            },
+        );
+    }
+
+    function uploadFile(n){
+        $('#fileType').val(n);
+        $('#openFile').val();
+        $('#openFile').click();
+    }
+
+    $(document).on('change', '#openFile', function () {
+        $('#importFile').form('submit', {
+            success: function (result) {
+            }
+        });
+    })
+
+</script>
+</body>
+<script th:replace="_fragment :: footer_list_blog">
+
+</script>
+</html>

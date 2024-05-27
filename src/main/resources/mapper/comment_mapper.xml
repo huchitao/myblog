@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zptc.blog.dao.CommentDao">
+    <resultMap id="myComment" type="Comment">
+        <id property="id" column="id"></id>
+        <result property="nickName" column="nick_name"></result>
+        <result property="email" column="email"></result>
+        <result property="content" column="content"></result>
+        <result property="avatar" column="avatar"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="isAdminComment" column="is_admin_comment"></result>
+        <association property="blog" javaType="Blog">
+            <id property="id" column="blog_id"></id>
+        </association>
+        <association property="parentComment" javaType="Comment">
+            <id property="id" column="parent_comment_id"></id>
+        </association>
+        <collection property="replyComments" javaType="java.util.ArrayList" ofType="Comment">
+            <id property="id" column="child_id"></id>
+            <result property="nickName" column="child_nick_name"></result>
+            <result property="email" column="child_email"></result>
+            <result property="content" column="child_content"></result>
+            <result property="avatar" column="child_avatar"></result>
+            <result property="createTime" column="child_create_time"></result>
+            <result property="isAdminComment" column="child_is_admin_comment"></result>
+            <association property="blog" javaType="Blog">
+                <id property="id" column="child_blog_id"></id>
+            </association>
+            <association property="parentComment" javaType="Comment">
+                <id property="id" column="child_parent_comment_id"></id>
+                <result property="nickName" column="child_parent_comment_name"></result>
+            </association>
+        </collection>
+    </resultMap>
+
+    <resultMap id="myChildComment" type="Comment">
+        <id property="id" column="id"></id>
+        <result property="nickName" column="nick_name"></result>
+        <result property="email" column="email"></result>
+        <result property="content" column="content"></result>
+        <result property="avatar" column="avatar"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="isAdminComment" column="is_admin_comment"></result>
+        <association property="blog" javaType="Blog">
+            <id property="id" column="blog_id"></id>
+        </association>
+        <association property="parentComment" javaType="Comment">
+            <id property="id" column="parent_comment_id"></id>
+            <result property="nickName" column="child_parent_comment_name"></result>
+        </association>
+        <collection property="replyComments" javaType="java.util.ArrayList" ofType="Comment">
+            <id property="id" column="child_id"></id>
+            <result property="nickName" column="child_nick_name"></result>
+            <result property="email" column="child_email"></result>
+            <result property="content" column="child_content"></result>
+            <result property="avatar" column="child_avatar"></result>
+            <result property="createTime" column="child_create_time"></result>
+            <result property="isAdminComment" column="child_is_admin_comment"></result>
+            <association property="blog" javaType="Blog">
+                <id property="id" column="child_blog_id"></id>
+            </association>
+            <association property="parentComment" javaType="Comment">
+                <id property="id" column="child_parent_comment_id"></id>
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="listParentCommentByBlogId" resultMap="myComment">
+        SELECT a.*,
+               b.id                as child_id,
+               b.avatar            as child_avatar,
+               b.is_admin_comment  as child_is_admin_comment,
+               b.content           as child_content,
+               b.create_time       as child_create_time,
+               c.nick_name         as child_parent_comment_name,
+               b.email             as child_email,
+               b.nick_name         as child_nick_name,
+               b.blog_id           as child_blog_id,
+               b.parent_comment_id as child_parent_comment_id
+        FROM t_comment a
+                 LEFT JOIN t_comment b on a.id = b.parent_comment_id
+                 LEFT JOIN t_comment c on b.parent_comment_id = c.id
+        WHERE a.blog_id = #{id}
+          and a.parent_comment_id is NULL
+        ORDER BY a.create_time DESC
+    </select>
+
+    <select id="listChildCommentByParentId" resultMap="myChildComment">
+        SELECT a.*,
+               b.id                as child_id,
+               b.avatar            as child_avatar,
+               b.is_admin_comment  as child_is_admin_comment,
+               b.content           as child_content,
+               b.create_time       as child_create_time,
+               c.nick_name         as child_parent_comment_name,
+               b.email             as child_email,
+               b.nick_name         as child_nick_name,
+               b.blog_id           as child_blog_id,
+               b.parent_comment_id as child_parent_comment_id
+        FROM t_comment a
+                 LEFT JOIN t_comment b on a.id = b.parent_comment_id
+                 LEFT JOIN
+             t_comment c on a.parent_comment_id = c.id
+        WHERE a.blog_id = #{blogId}
+          and a.parent_comment_id = #{parentId}
+    </select>
+
+    <select id="getCommentById" resultMap="myComment">
+        select *
+        from t_comment
+        WHERE id = #{id}
+    </select>
+
+    <insert id="savaComment">
+        insert into t_comment(avatar, content, create_time, email, nick_name, blog_id, parent_comment_id,
+                              is_admin_comment)
+        values (#{avatar}, #{content}, #{createTime}, #{email}, #{nickName}, #{blog.id}, #{parentComment.id},
+                #{isAdminComment})
+    </insert>
+</mapper>

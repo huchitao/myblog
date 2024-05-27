@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zptc.blog.dao.BlogsTagsDao">
+    <resultMap id="myTags" type="Tag">
+        <id property="id" column="tags_id"></id>
+    </resultMap>
+
+
+    <select id="getAllBlogIds" resultType="java.lang.String">
+        SELECT group_concat(blogs_id)
+        from t_blog_tags
+        WHERE tags_id = #{id}
+        GROUP BY tags_id
+    </select>
+
+    <insert id="addTags">
+        insert into t_blog_tags values
+        <foreach collection="tagIds" separator="," item="tId">
+            (#{blogId},#{tId})
+        </foreach>
+    </insert>
+
+    <delete id="deleteTags">
+        delete
+        from t_blog_tags
+        where blogs_id = #{blogId}
+    </delete>
+</mapper>

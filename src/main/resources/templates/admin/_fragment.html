@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--头部-->
+<nav th:fragment="nav(n)" class="ui inverted attached segment m-padded-tab-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item"></i>管理后台</h2>
+            <a href="#" th:href="@{/admin/blogs}" class="m-item m-mobile-hide item" th:classappend="${n==1}?'active'"><i class="home icon"></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class="m-item m-mobile-hide item" th:classappend="${n==2}?'active'"><i class="idea icon"></i>分类</a>
+            <a href="#" th:href="@{/admin/tags}"  class="m-item m-mobile-hide item" th:classappend="${n==3}?'active'"><i class="tags icon"></i>标签</a>
+            <a href="#" th:href="@{/admin/config}"  class="m-item m-mobile-hide item" th:classappend="${n==4}?'active'"><i class="setting icon"></i>信息</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img class="ui avatar image" src="https://unsplash.it/100/100?image=1061" th:src="${session.user.avatar}"/>
+                        <span th:text="${session.user.nickName}">Null</span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item" th:href="@{/admin/loginOut}">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class=" ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--底部-->
+<footer th:fragment="footer" class="ui inverted vertical segment" style="padding-top: 3em !important;padding-bottom: 1.5em !important;">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable  grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/image/profile.jpg" th:src="@{(${wechatQrCode})}" class="ui rounded image"  style="width:100px "/>
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header  m-text-thin m-text-spaced">最新播客</h4>
+                <div id="footer_blogs">
+                    <div class="ui inverted link list" th:fragment="footerListBlog">
+                        <a th:href="@{/blog/{id}(id=${blog.id})}" class="item" target="_blank" th:each="blog : ${footerNewBlogs}" th:text="${blog.title}">用户故事（User Story）</a>
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item" th:text="'Email：'+${email}">Email：mhq001209@163.com</a>
+                    <a href="#" class="item" th:text="'QQ：'+${qq}">QQ：1633049666</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header  m-text-thin m-text-spaced">Blog</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这的人有所帮助......</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-thiy">Copyright 2021 - 2022 Mhqqq Designed by Mhqqq</p>
+    </div>
+</footer>
+</body>
+<script th:fragment="footer_list_blog">
+    $('#footer_blogs').load(/*[[@{/footer/blog}]]*/"/footer/blog");
+</script>
+</html>

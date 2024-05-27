@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zptc.blog.dao.TagDao">
+    <select id="listTag" resultType="Tag">
+        select *
+        from t_tag
+    </select>
+
+    <select id="listTagTop" resultType="Tag">
+        select COUNT(a.tags_id) as blogsCount, b.id, b.name
+        FROM t_blog_tags a
+                 RIGHT JOIN t_tag b on a.tags_id = b.id
+        GROUP BY b.id
+        ORDER BY COUNT(a.tags_id) DESC LIMIT 10
+    </select>
+
+    <select id="listTagOrderByCount" resultType="Tag">
+        select COUNT(a.tags_id) as blogsCount, b.id, b.name
+        FROM t_blog_tags a
+                 RIGHT JOIN t_tag b on a.tags_id = b.id
+        GROUP BY b.id
+        ORDER BY COUNT(a.tags_id) DESC
+    </select>
+
+    <select id="getTagById" resultType="Tag">
+        select *
+        from t_tag
+        where id = #{id}
+    </select>
+
+    <select id="getTagByName" resultType="Tag">
+        select *
+        from t_tag
+        where name = #{name}
+    </select>
+
+    <insert id="saveTag">
+        insert into t_tag(name)
+        values (#{name})
+    </insert>
+
+    <delete id="deleteTag">
+        delete
+        from t_tag
+        where id = #{id}
+    </delete>
+
+    <update id="updateTag">
+        update t_tag
+        set name=#{name}
+        where id = #{id}
+    </update>
+</mapper>

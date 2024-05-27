@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>关于我</title>
+		<link rel="stylesheet" type="text/css" href="../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+		<link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" />
+		<script src="../static/js/jquery-3.4.1.js" th:src="@{/js/jquery-3.4.1.js}"></script>
+		<script src="../static/Semantic-UI-CSS-master/semantic.min.js" th:src="@{/Semantic-UI-CSS-master/semantic.min.js}"></script>
+	</head>
+	<body>
+		<!-- 导航 -->
+		<nav th:replace="_fragment :: nav(5)">
+		</nav>
+		<!-- 中间内容 -->
+		<div class="m-container  m-padded-tab-big">
+			<div class="ui container">
+				
+				<div class="ui stackable grid">
+					<div class="eleven wide column"> 
+						<img src="https://unsplash.it/800/600?image=1081" class="ui rounded image"/>
+					</div>
+					<div class="five wide column">
+						<div class="ui top attached segment">
+							<div class="ui header">关于我</div>
+						</div>
+						<div class="ui attached segment">
+							<p class="m-text">
+								一个独立的开发者，在傻和蠢之间徘徊，希望可以结识共同成长的小伙伴。
+							</p>
+							<p class="m-text">热爱iphone，喜欢折腾，正在探索高效的生活方法...</p>
+						</div>
+						<div class="ui attached segment">
+							<div class="ui orange basic pointing label">
+								编程
+							</div>
+							<div class="ui orange basic pointing label">
+								写作
+							</div>
+							<div class="ui orange basic pointing label">
+								思考
+							</div>
+							<div class="ui orange basic pointing label">
+								流动
+							</div>
+						</div>
+						<div class="ui attached segment">
+							<div class="ui teal basic  left pointing label m-margin-tb-thiy">
+								Java
+							</div>
+							<div class="ui teal basic  left pointing label m-margin-tb-thiy">
+								JavaScript
+							</div>
+							<div class="ui teal basic  left pointing label m-margin-tb-thiy">
+								Node
+							</div>
+							<div class="ui teal basic  left pointing label m-margin-tb-thiy">
+								React
+							</div>
+							<div class="ui teal basic  left pointing label m-margin-tb-thiy">
+								Mysql
+							</div>
+							<div class="ui teal basic left pointing label m-margin-tb-thiy">
+								Spring
+							</div>
+							<div class="ui teal basic left pointing label m-margin-tb-thiy">
+								...
+							</div>
+						</div>
+						<div class="ui bottom attached segment">
+							<a href="#" class="ui wechat circular icon button">
+								<i class="weixin icon"></i>
+							</a>
+							<a href="#" class="ui qq circular icon button" th:data-content="${qq}" data-position="bottom center">
+								<i class="qq icon"></i>
+							</a>
+						</div>
+						<div class="ui wechat-qr flowing popup transition hidden">
+							<img  src="../static/image/profile.jpg"  th:src="@{(${wechatQrCode})}" class="ui rounded image" style="width: 110px;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<!-- 底部 -->
+		<footer th:replace="_fragment :: footer">
+		</footer>
+		<script>
+			$(document).on('click','.menu.toggle',function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			
+			$('.wechat').popup({
+				popup : $('.wechat-qr'),
+				on : 'hover',
+				position:'bottom center'
+			});
+			
+			$('.qq').popup(	
+				
+			);
+		</script>
+	</body>
+	<script th:replace="_fragment :: footer_list_blog">
+
+	</script>
+</html>

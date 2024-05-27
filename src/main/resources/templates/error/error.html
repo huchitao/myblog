@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>错误</title>
+    <link rel="stylesheet" type="text/css" href="../../static/Semantic-UI-CSS-master/semantic.min.css" th:href="@{/Semantic-UI-CSS-master/semantic.min.css}" />
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}" />
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragment :: nav(0)">
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+<div class="m-container-small m-padded-tab-massive ">
+    <div class="ui error message">
+        <div class="ui container">
+            <h2>错误</h2>
+            <p>对不起，您访问的资源存在错误</p>
+            <div>
+                <div th:utext="'&lt;!--'" th:remove="tag"></div>
+                <div th:utext="'Failed Request URL :'+ ${url} " th:remove="tag"></div>
+                <div th:utext="'Exception message :'+${exception.message}" th:remove="tag"></div>
+                <ul th:remove="tag">
+                    <li th:each="st : ${exception.stackTrace}" th:remove="tag"><span th:utext="${st}" th:remove="tag"></span></li>
+                </ul>
+                <div th:utext="'--&gt;'" th:remove="tag"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<!-- 底部 -->
+<footer th:replace="_fragment :: footer">
+</footer>
+
+</body>
+</html>

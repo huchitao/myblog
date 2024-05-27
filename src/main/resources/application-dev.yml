@@ -1,0 +1,36 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: bigdata
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: cn.zptc.blog.entity
+
+logging:
+  level:
+    root: info
+    cn.zptc.blog: debug
+  file:
+    name: log/blog-dev.log
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+
+comment.avatar: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fww3.sinaimg.cn%2Fmw690%2F002pcC63gy1h8g5f0xm86j60ud0u0ady02.jpg&refer=http%3A%2F%2Fwww.sina.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1672289244&t=a688f63c205ce04370f18dec55191b98
+file:
+  upload: e:/blog/upload/
+  baseUrl: http://127.0.0.1:8080/
+
